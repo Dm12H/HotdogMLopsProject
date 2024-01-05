@@ -1,0 +1,6 @@
+# excluded directories
+.idea/
+
+
+# excluded files
+*.pyc
