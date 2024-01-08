@@ -1,0 +1,6 @@
+steps: [resize, centercrop, rescale, normalize]
+resize: {resize_size:[256], interpolation: 2}
+sentercrop: {size: 224}
+rescale: {minval: 0.0, maxval: 1.0}
+normalize: {mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]}
+

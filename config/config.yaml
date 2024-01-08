@@ -1,0 +1,6 @@
+dataset_dir: "./dataset"
+model_out_path: "./trained_model"
+model_inp: null
+-defaults:
+  preprocessing: sqnet
+  model: sqnet_preproc_base
