@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "hotdog-mlops"
+version = "0.1.0"
+description = "project to determine if target image is hotdog or not"
+authors = ["Максим Демидов <myudemidov@edu.hse.ru>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+torch = "^2.1.2"
+torchvision = "^0.16.2"
+hydra-core = "^1.3.2"
+pillow = "^10.2.0"
+dvc = "^3.38.1"
+dvc-gdrive = "^3.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
