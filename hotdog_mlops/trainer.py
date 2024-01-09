@@ -1,33 +1,32 @@
-import mlflow
-import torch
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-from omegaconf import DictConfig
-import numpy as np
-from typing import Union, Optional
 import sys
 import warnings
+from typing import Optional, Union
 
-from .model import SqeezeNetClassifier
+import mlflow
+import numpy as np
+import torch
+from omegaconf import DictConfig
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+from torch.optim.lr_scheduler import LRScheduler, ReduceLROnPlateau
+
 from .inference import evaluate
+from .model import SqeezeNetClassifier
 from .utils import current_commit_id
 
 TorchLoss = torch.nn.modules.loss._Loss
-TorchScheduler = Union[
-    torch.optim.lr_scheduler.LRScheduler,
-    torch.optim.lr_scheduler.ReduceLROnPlateau
-]
+TorchScheduler = Union[LRScheduler, ReduceLROnPlateau]
 
 
 class TrainingManager:
     _losses = {
         "cross_entropy": torch.nn.BCELoss,
-        "triplet": torch.nn.TripletMarginLoss
+        "triplet": torch.nn.TripletMarginLoss,
     }
 
     _optimizers = {
         "adam": torch.optim.Adam,
         "sgd": torch.optim.SGD,
-        "rmsprop": torch.optim.RMSprop
+        "rmsprop": torch.optim.RMSprop,
     }
 
     def __init__(self, training_config: DictConfig):
@@ -45,8 +44,8 @@ class TrainingManager:
             loss_params = loss_config.get("params", dict())
             loss_func = loss_type(**loss_params)
         except (AttributeError, TypeError) as e:
-            err_msg = (f"wrong/missing"
-                       f" config values for loss: {loss_config.name}")
+            loss_name = loss_config.name
+            err_msg = f"wrong/missing config values for loss: {loss_name}"
             print(err_msg, sys.stderr)
             raise e
 
@@ -54,19 +53,15 @@ class TrainingManager:
 
     def _get_optimizer(self, model) -> torch.optim.Optimizer:
         optimizer_config = self.config.optimizer
-        opt_type = self._optimizers.get(optimizer_config.name, None)
+        optimizer_name = optimizer_config.name
+        opt_type = self._optimizers.get(optimizer_name, None)
         if opt_type is None:
-            err_msg = (f"unsupported or empty optimizer"
-                       f" :'{optimizer_config.name}'")
+            err_msg = f"unsupported or empty optimizer" f" :'{optimizer_name}'"
             raise TypeError(err_msg, sys.stderr)
         try:
-            opt = opt_type(
-                model.parameters(),
-                **optimizer_config.params
-            )
+            opt = opt_type(model.parameters(), **optimizer_config.params)
         except (AttributeError, TypeError) as e:
-            err_msg = (f"wrong/missing"
-                       f" params for optimizer: {optimizer_config.name}")
+            err_msg = f"wrong/missing params for optimizer: '{optimizer_name}'"
             print(err_msg, sys.stderr)
             raise e
         return opt
@@ -74,19 +69,17 @@ class TrainingManager:
     def _get_scheduler(self) -> Optional[TorchScheduler]:
         scheduler_config = self.config.get("scheduler")
         if scheduler_config is None:
-            warnings.warn(
-                "Scheduler not set, training without one"
-            )
+            warnings.warn("Scheduler not set, training without one")
             return
         return None
 
     def train_epoch(
-            self,
-            model: SqeezeNetClassifier,
-            optimizer: torch.optim.Optimizer,
-            scheduler: TorchScheduler,
-            train_loader) -> dict[str:float]:
-
+        self,
+        model: SqeezeNetClassifier,
+        optimizer: torch.optim.Optimizer,
+        scheduler: TorchScheduler,
+        train_loader,
+    ) -> dict[str:float]:
         losses = []
         preds = []
         labels = []
@@ -121,14 +114,13 @@ class TrainingManager:
             "accuracy": acc,
             "precision": prec,
             "recall": recall,
-            "loss": avg_loss
+            "loss": avg_loss,
         }
 
         return result_dict
 
     def train(self, model, train_loader, val_loader, run_name="a run"):
         with mlflow.start_run(run_name=run_name):
-
             mlflow.log_params(dict(self.config))
             mlflow.log_params(dict(model.config))
             mlflow.log_param("commit ID", current_commit_id())

@@ -1,16 +1,12 @@
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-from torch.utils.data import DataLoader
 import numpy as np
 import torch
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+from torch.utils.data import DataLoader
 
 from .model import SqeezeNetClassifier
 
 
-def evaluate(
-        model: SqeezeNetClassifier,
-        loader,
-        loss_func
-    ):
+def evaluate(model: SqeezeNetClassifier, loader, loss_func):
     losses = []
     preds = []
     labels = []
@@ -38,16 +34,13 @@ def evaluate(
         "accuracy": acc,
         "precision": prec,
         "recall": recall,
-        "loss": avg_loss
+        "loss": avg_loss,
     }
 
     return result_dict
 
 
-def run_inference(
-        model: SqeezeNetClassifier,
-        loader: DataLoader):
-
+def run_inference(model: SqeezeNetClassifier, loader: DataLoader):
     predictions, filenames = [], []
     for data, fnames in loader:
         preds = model.predict(data)
@@ -55,8 +48,5 @@ def run_inference(
         predictions += list(preds)
         filenames += list(fnames)
 
-    out_dict = {
-        "predicted_labels": predictions,
-        "filenames": filenames
-    }
+    out_dict = {"predicted_labels": predictions, "filenames": filenames}
     return out_dict

@@ -1,6 +1,6 @@
-from torchvision.transforms import v2
-from omegaconf import DictConfig
 import torch
+from omegaconf import DictConfig
+from torchvision.transforms import v2
 
 
 class TransformWrapper:
@@ -16,12 +16,9 @@ class TransformerBuilder:
         "resize": v2.Resize,
         "centercrop": v2.CenterCrop,
         "rescale": TransformWrapper(
-            v2.Compose(
-                [v2.ToImage(),
-                 v2.ToDtype(torch.float32, scale=True)]
-            )
+            v2.Compose([v2.ToImage(), v2.ToDtype(torch.float32, scale=True)])
         ),
-        "normalize": v2.Normalize
+        "normalize": v2.Normalize,
     }
 
     def __init__(self, config):

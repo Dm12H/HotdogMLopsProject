@@ -1,28 +1,28 @@
 import warnings
-from typing import Iterator
-from collections.abc import Iterable
-
-from torch.nn import Parameter
-from torchvision.models import squeezenet1_1,  SqueezeNet1_1_Weights
-from sklearn.preprocessing import LabelEncoder
 from collections import OrderedDict
-from dvc.api import DVCFileSystem
+from collections.abc import Iterable
 from pathlib import Path
+from typing import Iterator
+
 import torch
+from dvc.api import DVCFileSystem
+from sklearn.preprocessing import LabelEncoder
+from torch.nn import Parameter
+from torchvision.models import SqueezeNet1_1_Weights, squeezenet1_1
 
 from .transform import get_transforms
 
 
 class SqeezeNetClassifier(torch.nn.Module):
     def __init__(
-            self,
-            model_params,
-            transform_params=None,
+        self,
+        model_params,
+        transform_params=None,
     ):
         super().__init__()
         self.config = model_params
         use_default_weights = model_params.use_default_weights
-        weights = 'IMAGENET1K_V1' if use_default_weights else None
+        weights = "IMAGENET1K_V1" if use_default_weights else None
         self._label_encoder = self._get_label_encoder()
         self._model = squeezenet1_1(weights=weights)
         self._add_classifier_head()
@@ -37,12 +37,14 @@ class SqeezeNetClassifier(torch.nn.Module):
 
     def _add_classifier_head(self):
         classifier = torch.nn.Sequential(
-            OrderedDict([
-                ("0", torch.nn.Dropout(p=self.config.dropout_p)),
-                ("1", torch.nn.Flatten()),
-                ("2", torch.nn.Linear(86528, 1)),
-                ("3", torch.nn.Sigmoid())
-            ])
+            OrderedDict(
+                [
+                    ("0", torch.nn.Dropout(p=self.config.dropout_p)),
+                    ("1", torch.nn.Flatten()),
+                    ("2", torch.nn.Linear(86528, 1)),
+                    ("3", torch.nn.Sigmoid()),
+                ]
+            )
         )
         self._model.classifier = classifier
 
@@ -82,7 +84,7 @@ class SqeezeNetClassifier(torch.nn.Module):
         else:
             transforms = self._build_transformer(params)
         return transforms
-    
+
     def set_transforms(self, transforms):
         self.transforms = transforms
 
@@ -109,9 +111,7 @@ class SqeezeNetClassifier(torch.nn.Module):
 
     def load(self, path: Path):
         if not path.exists():
-            warnings.warn(
-                "model weights are missing, downloading from dvc"
-            )
+            warnings.warn("model weights are missing, downloading from dvc")
             fs = DVCFileSystem(rev="main")
             fs.get_file(path.name, path)
         self._model.load_state_dict(torch.load(path))
