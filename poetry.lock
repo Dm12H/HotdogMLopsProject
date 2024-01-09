@@ -418,6 +418,17 @@ files = [
 pycparser = "*"
 
 [[package]]
+name = "cfgv"
+version = "3.4.0"
+description = "Validate configuration and produce human readable error messages."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "cfgv-3.4.0-py2.py3-none-any.whl", hash = "sha256:b7265b1f29fd3316bfcd2b330d63d024f2bfd8bcb8b0272f8e19a504856c48f9"},
+    {file = "cfgv-3.4.0.tar.gz", hash = "sha256:e52591d4c5f5dead8e0f673fb16db7949d2cfb3f7da4582893288f0ded8fe560"},
+]
+
+[[package]]
 name = "charset-normalizer"
 version = "3.3.2"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
@@ -787,6 +798,17 @@ files = [
 ]
 
 [[package]]
+name = "distlib"
+version = "0.3.8"
+description = "Distribution utilities"
+optional = false
+python-versions = "*"
+files = [
+    {file = "distlib-0.3.8-py2.py3-none-any.whl", hash = "sha256:034db59a0b96f8ca18035f36290806a9a6e6bd9d1ff91e45a7f172eb17e51784"},
+    {file = "distlib-0.3.8.tar.gz", hash = "sha256:1530ea13e350031b6312d8580ddb6b27a104275a31106523b8f123787f494f64"},
+]
+
+[[package]]
 name = "distro"
 version = "1.9.0"
 description = "Distro - an OS platform information API"
@@ -1048,22 +1070,21 @@ tests = ["dvc[testing]", "flaky (==3.7.0)", "mypy (==0.910)", "pylint (==2.15.9)
 
 [[package]]
 name = "dvc-objects"
-version = "3.0.3"
+version = "3.0.5"
 description = "dvc objects - filesystem and object-db level abstractions to use in dvc and dvc-data"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "dvc-objects-3.0.3.tar.gz", hash = "sha256:4d6df96aa9999f2a6ade9d592b2245988f1b0063be73ea5ab26e6873aa34016f"},
-    {file = "dvc_objects-3.0.3-py3-none-any.whl", hash = "sha256:e580632e651bc69433ed029d2188741b7ac4c6c0245f3fb258a745c17b0872ab"},
+    {file = "dvc-objects-3.0.5.tar.gz", hash = "sha256:d7c8e304359a8ef9247e8ceefb6aa9a5b7dc016f76487cfbee2f4eecacf5f394"},
+    {file = "dvc_objects-3.0.5-py3-none-any.whl", hash = "sha256:3be73fadeefe418585b59afaa66293a2bd5273f550c910c60b8bbc8376985fad"},
 ]
 
 [package.dependencies]
 fsspec = ">=2022.10.0"
-funcy = ">=1.14"
-shortuuid = ">=0.5.0"
+funcy = {version = ">=1.14", markers = "python_version < \"3.12\""}
 
 [package.extras]
-dev = ["dvc-objects[tests]", "mypy (==1.7.1)", "tqdm (>=4.63.1,<5)", "types-tqdm", "typing-extensions (>=3.7.4)"]
+dev = ["dvc-objects[tests]", "mypy (==1.8.0)", "tqdm (>=4.63.1,<5)", "types-tqdm", "typing-extensions (>=3.7.4)"]
 tests = ["pytest (>=7,<8)", "pytest-asyncio (>=0.23.2,<1)", "pytest-benchmark", "pytest-cov (>=4.1.0)", "pytest-mock", "pytest-sugar", "reflink"]
 
 [[package]]
@@ -1462,13 +1483,13 @@ grpcio-gcp = ["grpcio-gcp (>=0.2.2,<1.0.dev0)"]
 
 [[package]]
 name = "google-api-python-client"
-version = "2.112.0"
+version = "2.113.0"
 description = "Google API Client Library for Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-api-python-client-2.112.0.tar.gz", hash = "sha256:c3bcb5fd70d57f4c94b30c0dbeade53c216febfbf1d771eeb1a2fa74bd0d6756"},
-    {file = "google_api_python_client-2.112.0-py2.py3-none-any.whl", hash = "sha256:f5e45d9812376deb7e04cda8d8ca5233aa608038bdbf1253ad8f7edcb7f6d595"},
+    {file = "google-api-python-client-2.113.0.tar.gz", hash = "sha256:bcffbc8ffbad631f699cf85aa91993f3dc03060b234ca9e6e2f9135028bd9b52"},
+    {file = "google_api_python_client-2.113.0-py2.py3-none-any.whl", hash = "sha256:25659d488df6c8a69615b2a510af0e63b4c47ab2cb87d71c1e13b28715906e27"},
 ]
 
 [package.dependencies]
@@ -1623,13 +1644,13 @@ test = ["objgraph", "psutil"]
 
 [[package]]
 name = "gto"
-version = "1.6.1"
+version = "1.6.2"
 description = "Version and deploy your models following GitOps principles"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "gto-1.6.1-py3-none-any.whl", hash = "sha256:a5dabecd0cae0738778197ffd491a7c4a891160912ade18ecd5d9ada23385685"},
-    {file = "gto-1.6.1.tar.gz", hash = "sha256:176562699c26e79e535c0aa9df3b7c5db4453f43051f53da93cf177d6dc9df4f"},
+    {file = "gto-1.6.2-py3-none-any.whl", hash = "sha256:22c65b2b2c9438fb2eb31c31f12a759e83d7ea02957a856836ba630ab007e7f2"},
+    {file = "gto-1.6.2.tar.gz", hash = "sha256:b422db71df9b3be8d03ab24620040a8c04cbfada1af371940076b5d9821c9ef4"},
 ]
 
 [package.dependencies]
@@ -1644,7 +1665,7 @@ tabulate = ">=0.8.10"
 typer = ">=0.4.1"
 
 [package.extras]
-tests = ["freezegun", "pylint (==3.0.2)", "pylint-plugin-utils", "pytest", "pytest-cov", "pytest-lazy-fixture (==0.6.3)", "pytest-mock", "pytest-test-utils", "types-freezegun"]
+tests = ["freezegun", "pylint (==3.0.3)", "pylint-plugin-utils", "pytest", "pytest-cov", "pytest-lazy-fixture (==0.6.3)", "pytest-mock", "pytest-test-utils", "types-freezegun"]
 
 [[package]]
 name = "gunicorn"
@@ -1695,6 +1716,20 @@ files = [
 antlr4-python3-runtime = "==4.9.*"
 omegaconf = ">=2.2,<2.4"
 packaging = "*"
+
+[[package]]
+name = "identify"
+version = "2.5.33"
+description = "File identification library for Python"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "identify-2.5.33-py2.py3-none-any.whl", hash = "sha256:d40ce5fcd762817627670da8a7d8d8e65f24342d14539c59488dc603bf662e34"},
+    {file = "identify-2.5.33.tar.gz", hash = "sha256:161558f9fe4559e1557e1bff323e8631f6a0e4837f7497767c1782832f16b62d"},
+]
+
+[package.extras]
+license = ["ukkonen"]
 
 [[package]]
 name = "idna"
@@ -2288,6 +2323,20 @@ extra = ["lxml (>=4.6)", "pydot (>=1.4.2)", "pygraphviz (>=1.11)", "sympy (>=1.1
 test = ["pytest (>=7.2)", "pytest-cov (>=4.0)"]
 
 [[package]]
+name = "nodeenv"
+version = "1.8.0"
+description = "Node.js virtual environment builder"
+optional = false
+python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*"
+files = [
+    {file = "nodeenv-1.8.0-py2.py3-none-any.whl", hash = "sha256:df865724bb3c3adc86b3876fa209771517b0cfe596beff01a92700e0e8be4cec"},
+    {file = "nodeenv-1.8.0.tar.gz", hash = "sha256:d51e0c37e64fbf47d017feac3145cdbb58836d7eee8c6f6d3b6880c5456227d2"},
+]
+
+[package.dependencies]
+setuptools = "*"
+
+[[package]]
 name = "numpy"
 version = "1.26.3"
 description = "Fundamental package for array computing in Python"
@@ -2766,6 +2815,24 @@ files = [
 [package.extras]
 docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx (>=7.1.1)", "sphinx-autodoc-typehints (>=1.24)"]
 test = ["appdirs (==1.4.4)", "covdefaults (>=2.3)", "pytest (>=7.4)", "pytest-cov (>=4.1)", "pytest-mock (>=3.11.1)"]
+
+[[package]]
+name = "pre-commit"
+version = "3.6.0"
+description = "A framework for managing and maintaining multi-language pre-commit hooks."
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "pre_commit-3.6.0-py2.py3-none-any.whl", hash = "sha256:c255039ef399049a5544b6ce13d135caba8f2c28c3b4033277a788f434308376"},
+    {file = "pre_commit-3.6.0.tar.gz", hash = "sha256:d30bad9abf165f7785c15a21a1f46da7d0677cb00ee7ff4c579fd38922efe15d"},
+]
+
+[package.dependencies]
+cfgv = ">=2.0.0"
+identify = ">=1.0.0"
+nodeenv = ">=0.11.1"
+pyyaml = ">=5.1"
+virtualenv = ">=20.10.0"
 
 [[package]]
 name = "prompt-toolkit"
@@ -4039,6 +4106,26 @@ files = [
 ]
 
 [[package]]
+name = "virtualenv"
+version = "20.25.0"
+description = "Virtual Python Environment builder"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "virtualenv-20.25.0-py3-none-any.whl", hash = "sha256:4238949c5ffe6876362d9c0180fc6c3a824a7b12b80604eeb8085f2ed7460de3"},
+    {file = "virtualenv-20.25.0.tar.gz", hash = "sha256:bf51c0d9c7dd63ea8e44086fa1e4fb1093a31e963b86959257378aef020e1f1b"},
+]
+
+[package.dependencies]
+distlib = ">=0.3.7,<1"
+filelock = ">=3.12.2,<4"
+platformdirs = ">=3.9.1,<5"
+
+[package.extras]
+docs = ["furo (>=2023.7.26)", "proselint (>=0.13)", "sphinx (>=7.1.2)", "sphinx-argparse (>=0.4)", "sphinxcontrib-towncrier (>=0.2.1a0)", "towncrier (>=23.6)"]
+test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7)", "packaging (>=23.1)", "pytest (>=7.4)", "pytest-env (>=0.8.2)", "pytest-freezer (>=0.4.8)", "pytest-mock (>=3.11.1)", "pytest-randomly (>=3.12)", "pytest-timeout (>=2.1)", "setuptools (>=68)", "time-machine (>=2.10)"]
+
+[[package]]
 name = "voluptuous"
 version = "0.14.1"
 description = "Python data validation library"
@@ -4246,4 +4333,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.10"
-content-hash = "f6b85655eb82e38cfee10b67fef7b9ddc6c0c9d0666b8e5a4f3ed4f1220bedf1"
+content-hash = "e80f524a1a4211d3cc27f7047c840df7600b1f8ddec6022a1b92dbe1ae3835ed"
