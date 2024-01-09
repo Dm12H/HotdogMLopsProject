@@ -158,7 +158,8 @@ cython_debug/
 # default dataset folder
 dataset/
 /dataset
-/trained_model.pt
+trained_model.pt
+output.csv
 
 # dvc auth
 authentication/
