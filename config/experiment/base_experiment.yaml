@@ -2,7 +2,7 @@ id: base_experiment
 run_name: base_run
 train:
   batch: 100
-  n_epochs: 3
+  n_epochs: 5
   shuffle: True
   loss:
     name: cross_entropy
