@@ -43,7 +43,7 @@ def train(cfg):
         val_loader,
         run_name=experiment_cfg.run_name)
 
-    trained_model.save(cfg.model_out_path)
+    trained_model.save(cfg.model_out)
 
 
 if __name__ == "__main__":
