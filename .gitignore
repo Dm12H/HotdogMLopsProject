@@ -159,3 +159,10 @@ cython_debug/
 dataset/
 /dataset
 /trained_model.pt
+
+# dvc auth
+authentication/
+
+#helper python scripts
+prepare_dataset.py
+split_dataset.py
