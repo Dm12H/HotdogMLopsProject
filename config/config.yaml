@@ -1,6 +1,16 @@
-dataset_dir: "./dataset"
-model_out_path: "./trained_model"
+dataset_dir: "dataset"
+model_out_path: "trained_model"
 model_inp: null
--defaults:
-  preprocessing: sqnet
-  model: sqnet_preproc_base
+base_dir: null
+
+hydra:
+  job:
+    chdir: False
+  output_subdir: null
+
+logging:
+  mlflow_addr: 127.0.0.1:8080
+
+defaults:
+  - _self_
+  - experiment: base_experiment

@@ -1,0 +1,16 @@
+id: base_experiment
+run_name: base_run
+train:
+  batch: 100
+  n_epochs: 3
+  shuffle: True
+  loss:
+    name: cross_entropy
+  optimizer:
+    name: adam
+    params: {lr: 0.0001}
+
+defaults:
+  - _self_
+  - preprocessing: sqnet
+  - model: sqnet_preproc_base

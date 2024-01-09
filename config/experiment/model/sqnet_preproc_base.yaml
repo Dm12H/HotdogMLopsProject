@@ -1,0 +1,4 @@
+last_n: 3
+dropout_p: 0.7
+use_default_weights: True
+classes: ["hot_dog", "not_hot_dog"]
