@@ -1,3 +1,4 @@
+import warnings
 from typing import Iterator
 from collections.abc import Iterable
 
@@ -5,6 +6,8 @@ from torch.nn import Parameter
 from torchvision.models import squeezenet1_1,  SqueezeNet1_1_Weights
 from sklearn.preprocessing import LabelEncoder
 from collections import OrderedDict
+from dvc.api import DVCFileSystem
+from pathlib import Path
 import torch
 
 from .transform import get_transforms
@@ -85,11 +88,13 @@ class SqeezeNetClassifier(torch.nn.Module):
 
     def parameters(self, recurse: bool = True) -> Iterator[Parameter]:
         return self._model.parameters(recurse)
-    
-    def _inference(self, img, mode):
+
+    def predict(self, img):
         transformed_img = self.transforms(img)
         out = self._model(transformed_img)
-        return out
+        class_ids = out.flatten().round().to(torch.int32).tolist()
+        labels = self._label_encoder.inverse_transform(class_ids)
+        return labels
 
     def __call__(self, img, mode="eval"):
         return self._inference(img, mode)
@@ -102,4 +107,11 @@ class SqeezeNetClassifier(torch.nn.Module):
     def save(self, path):
         torch.save(self._model.state_dict(), path)
 
-
+    def load(self, path: Path):
+        if not path.exists():
+            warnings.warn(
+                "model weights are missing, downloading from dvc"
+            )
+            fs = DVCFileSystem(rev="main")
+            fs.get_file(path.name, path)
+        self._model.load_state_dict(torch.load(path))

@@ -1,4 +1,5 @@
 from sklearn.metrics import accuracy_score, precision_score, recall_score
+from torch.utils.data import DataLoader
 import numpy as np
 import torch
 
@@ -41,3 +42,21 @@ def evaluate(
     }
 
     return result_dict
+
+
+def run_inference(
+        model: SqeezeNetClassifier,
+        loader: DataLoader):
+
+    predictions, filenames = [], []
+    for data, fnames in loader:
+        preds = model.predict(data)
+
+        predictions += list(preds)
+        filenames += list(fnames)
+
+    out_dict = {
+        "predicted_labels": predictions,
+        "filenames": filenames
+    }
+    return out_dict
