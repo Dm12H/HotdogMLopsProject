@@ -39,7 +39,7 @@ def infer(cfg):
     else:
         full_output_path = Path(base_dir, cfg.infer_out)
 
-    df.to_csv(full_output_path, sep=";", index_label=False)
+    df.to_csv(full_output_path, sep=";", index=False)
     print(f"Inference finished, results saved to {full_output_path}")
 
 
