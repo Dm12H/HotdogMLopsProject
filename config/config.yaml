@@ -1,9 +1,12 @@
 dataset_dir: "dataset"
-model_out_path: "trained_model.pt"
-model_inp: null
+model_out: "trained_model.pt"
+infer_out: "output.csv"
+model: "trained_model.pt"
 base_dir: null
 
 hydra:
+  run:
+    dir: .
   job:
     chdir: False
   output_subdir: null
