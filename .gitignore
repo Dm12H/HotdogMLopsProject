@@ -158,3 +158,4 @@ cython_debug/
 # default dataset folder
 dataset/
 /dataset
+/trained_model.pt
