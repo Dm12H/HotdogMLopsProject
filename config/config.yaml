@@ -12,7 +12,7 @@ hydra:
   output_subdir: null
 
 logging:
-  mlflow_addr: 127.0.0.1:8080
+  mlflow_addr: 128.0.1.1:8080
 
 defaults:
   - _self_
