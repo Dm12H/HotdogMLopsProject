@@ -1,3 +1,5 @@
+[core]
+    remote = googly
 ['remote "googly"']
     url = gdrive://1JJCZ0mZa9TuGWcZUturH82_uAUiXF1_i/
     gdrive_acknowledge_abuse = true
